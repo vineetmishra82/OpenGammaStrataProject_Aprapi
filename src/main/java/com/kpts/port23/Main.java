@@ -154,29 +154,33 @@ public class Main {
 			
 			for (Integer num : loops) {
 				
+				Product product = new 
+						Product(item.get("SECURITY_SCHEME")+","+item.get("SECURITY_VALUE"),
+								item.get("SECURITY_SCHEME")+","+item.get("ISSUER_VALUE"),
+								Long.valueOf(item.get("QUANTITY").replace("L", "")),
+								Double.valueOf(item.get("NOTIONAL")),
+								Double.valueOf(item.get("FIXED_RATE")),
+								item.get("START_DATE"),
+								item.get("END_DATE"),
+								item.get("SETTLEMENT"),
+								Double.valueOf(item.get("CLEAN_PRICE")),
+								item.get("VAL_DATE")
+								);
+				
 				Kernel kernel = new Kernel() {
 					
 					@Override
 					public void run() {
-						Product product = new 
-								Product(item.get("SECURITY_SCHEME")+","+item.get("SECURITY_VALUE"),
-										item.get("SECURITY_SCHEME")+","+item.get("ISSUER_VALUE"),
-										Long.valueOf(item.get("QUANTITY").replace("L", "")),
-										Double.valueOf(item.get("NOTIONAL")),
-										Double.valueOf(item.get("FIXED_RATE")),
-										item.get("START_DATE"),
-										item.get("END_DATE"),
-										item.get("SETTLEMENT"),
-										Double.valueOf(item.get("CLEAN_PRICE")),
-										item.get("VAL_DATE")
-										);
+						
 						product.calculatePresentValue();						
 					}
 				};
 				
 				kernel.execute(num);
 				
-				System.out.println("Processed Row "+lineNo+" for "+loopSize+" times.\n");
+				kernel.dispose();
+				
+				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n");
 				
 				lineNo++;
 			}
