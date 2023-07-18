@@ -168,9 +168,13 @@ public class Main {
 								item.get("RowNo")
 								);
 				
-				product.execute(num);
 				
-				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n");
+				Product.computeCount = 0;
+				
+				Range range = Range.create(num);
+				product.execute(range);
+				
+				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times and times computed (check) is "+Product.computeCount+" \n");
 				
 				product.dispose();
 				lineNo++;

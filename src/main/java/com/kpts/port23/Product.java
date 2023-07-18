@@ -93,6 +93,8 @@ public class Product extends Kernel {
 	  
 	  public String rowNum;
 	  
+	  public static double computeCount;
+	  
 	  public Product(String sECURITY_ID, String iSSUER_ID, long qUANTITY,
 			double nOTIONAL, double fIXED_RATE,
 			String sTART_DATE,
@@ -202,6 +204,7 @@ public class Product extends Kernel {
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
+	  computeCount++;  
 	  return str;
 	   
 	}
@@ -209,10 +212,10 @@ public class Product extends Kernel {
 	@Override
 	public void run() {
 		
-	String str ="For row "+rowNum+" iteration - "+getGlobalId(); 
+	String str ="\nFor row "+rowNum+" iteration - "+getGlobalId(); 
 		str+=calculatePresentValue();
 	
-	WriteToFile(str);
+//	WriteToFile(str);
 	
 	}
 
