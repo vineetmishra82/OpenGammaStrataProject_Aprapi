@@ -167,6 +167,8 @@ public class Main {
 								item.get("VAL_DATE")
 								);
 				
+				product.resultData.clear();
+				
 				product.execute(num);
 				
 				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n"+" and result count is "+product.resultData.size());
