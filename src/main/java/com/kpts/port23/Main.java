@@ -167,15 +167,11 @@ public class Main {
 								item.get("VAL_DATE")
 								);
 				
-				product.calculatePresentValue();
-				
-				
 				product.execute(num);
 				
+				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n"+" and result count is "+product.resultData.size());
+				
 				product.dispose();
-				
-				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n");
-				
 				lineNo++;
 			}
 						

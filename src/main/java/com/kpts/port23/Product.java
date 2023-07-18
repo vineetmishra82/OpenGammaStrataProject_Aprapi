@@ -4,6 +4,8 @@ import static com.opengamma.strata.basics.currency.Currency.EUR;
 import static com.opengamma.strata.basics.date.DayCounts.ACT_365F;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.aparapi.Kernel;
 import com.google.common.collect.ImmutableMap;
@@ -84,6 +86,8 @@ public class Product extends Kernel {
 	  private CurveMetadata METADATA_ISSUER = Curves.zeroRates(NAME_ISSUER, ACT_365F);
 	  private InterpolatedNodalCurve CURVE_ISSUER = InterpolatedNodalCurve.of(
 		      METADATA_ISSUER, DoubleArray.of(0.2, 9.0, 15.0), DoubleArray.of(0.03, 0.05, 0.13), INTERPOLATOR);
+	  
+	  public static List<String> resultData = new ArrayList<String>();
 	  
 	  public Product(String sECURITY_ID, String iSSUER_ID, long qUANTITY,
 			double nOTIONAL, double fIXED_RATE,
@@ -181,7 +185,7 @@ public class Product extends Kernel {
 		return SecurityId.of(values[0],values[1]);
 	}
 	
-	public String calculatePresentValue() {
+	public void calculatePresentValue() {
 	    CurrencyAmount computedTrade = TRADE_PRICER.presentValue(TRADE, PROVIDER);
 	    CurrencyAmount computedProduct = PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
 	    CurrencyAmount pvPayment =
@@ -193,7 +197,7 @@ public class Product extends Kernel {
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
-	    return str;
+	    resultData.add(str);
 	}
 
 	@Override
