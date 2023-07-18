@@ -59,7 +59,7 @@ public class Main {
 					headers.add(string);
 					
 				}
-				count++;
+				
 				
 				System.out.println("headers size is "+headers.size());
 			}
@@ -67,7 +67,7 @@ public class Main {
 			else if(values.length>0) {
 				
 				Map<String,String> item = new TreeMap<String, String>();
-				
+				item.put("RowNo",String.valueOf(count));
 				for(int i = 0;i<headers.size();i++)
 				{
 					item.put(headers.get(i), values[i]);
@@ -77,7 +77,7 @@ public class Main {
 			}	
 			
 			
-			
+			count++;
 		}
 		
 		if(itemList.size()>0)			
@@ -164,14 +164,13 @@ public class Main {
 								item.get("END_DATE"),
 								item.get("SETTLEMENT"),
 								Double.valueOf(item.get("CLEAN_PRICE")),
-								item.get("VAL_DATE")
+								item.get("VAL_DATE"),
+								item.get("RowNo")
 								);
-				
-				product.resultData.clear();
 				
 				product.execute(num);
 				
-				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n"+" and result count is "+product.resultData.size());
+				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n");
 				
 				product.dispose();
 				lineNo++;

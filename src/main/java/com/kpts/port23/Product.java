@@ -3,6 +3,10 @@ package com.kpts.port23;
 import static com.opengamma.strata.basics.currency.Currency.EUR;
 import static com.opengamma.strata.basics.date.DayCounts.ACT_365F;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,12 +91,12 @@ public class Product extends Kernel {
 	  private InterpolatedNodalCurve CURVE_ISSUER = InterpolatedNodalCurve.of(
 		      METADATA_ISSUER, DoubleArray.of(0.2, 9.0, 15.0), DoubleArray.of(0.03, 0.05, 0.13), INTERPOLATOR);
 	  
-	  public static List<String> resultData = new ArrayList<String>();
+	  public String rowNum;
 	  
 	  public Product(String sECURITY_ID, String iSSUER_ID, long qUANTITY,
 			double nOTIONAL, double fIXED_RATE,
 			String sTART_DATE,
-			String eND_DATE,String settlementDate,double cleanPrice,String valDate) {
+			String eND_DATE,String settlementDate,double cleanPrice,String valDate,String rowNum) {
 		SECURITY_ID = getSecurityID(sECURITY_ID);
 		ISSUER_ID = getLegalEntityID(iSSUER_ID);
 		QUANTITY = qUANTITY;
@@ -122,6 +126,7 @@ public class Product extends Kernel {
 			      CurrencyAmount.of(EUR, -QUANTITY * NOTIONAL * DIRTY_PRICE), SETTLEMENT);
 		CalculateTrade();
 		PROVIDER  = createRatesProvider(VAL_DATE);
+		this.rowNum = rowNum;
 	  }
 
 	private LegalEntityDiscountingProvider createRatesProvider(LocalDate valuationDate) {
@@ -185,7 +190,7 @@ public class Product extends Kernel {
 		return SecurityId.of(values[0],values[1]);
 	}
 	
-	public void calculatePresentValue() {
+	public String calculatePresentValue() {
 	    CurrencyAmount computedTrade = TRADE_PRICER.presentValue(TRADE, PROVIDER);
 	    CurrencyAmount computedProduct = PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
 	    CurrencyAmount pvPayment =
@@ -197,13 +202,37 @@ public class Product extends Kernel {
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
-	    resultData.add(str);
+	  return str;
+	   
 	}
 
 	@Override
 	public void run() {
+		
+	String str ="For row "+rowNum+" iteration - "+getGlobalId(); 
+		str+=calculatePresentValue();
+	
+	WriteToFile(str);
+	
+	}
 
-		calculatePresentValue();
+	private void WriteToFile(String str) {
+		  try {
+		    	
+		    	BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("resultData.txt",true));
+		    	
+		    	bufferedWriter.append(str);
+		    	
+		    	bufferedWriter.close();
+		    	
+		    }catch(FileNotFoundException ex)
+		    {
+		    	System.out.println("Target file not found to write");
+		    }
+		    catch(IOException ex)
+		    {
+		    	System.out.println("Could not write to file...");
+		    }
 		
 	}
 	  
