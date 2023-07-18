@@ -204,7 +204,7 @@ public class Product extends Kernel {
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
-	  computeCount++;  
+	 
 	  return str;
 	   
 	}
@@ -214,7 +214,7 @@ public class Product extends Kernel {
 		
 	String str ="\nFor row "+rowNum+" iteration - "+getGlobalId(); 
 		str+=calculatePresentValue();
-	
+		 computeCount = getGlobalId();  
 //	WriteToFile(str);
 	
 	}
