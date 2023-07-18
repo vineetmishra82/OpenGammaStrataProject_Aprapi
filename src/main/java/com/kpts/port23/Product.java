@@ -5,6 +5,7 @@ import static com.opengamma.strata.basics.date.DayCounts.ACT_365F;
 
 import java.time.LocalDate;
 
+import com.aparapi.Kernel;
 import com.google.common.collect.ImmutableMap;
 import com.opengamma.strata.basics.ReferenceData;
 import com.opengamma.strata.basics.currency.CurrencyAmount;
@@ -44,7 +45,7 @@ import com.opengamma.strata.product.bond.ResolvedFixedCouponBond;
 import com.opengamma.strata.product.bond.ResolvedFixedCouponBondSettlement;
 import com.opengamma.strata.product.bond.ResolvedFixedCouponBondTrade;
 
-public class Product {
+public class Product extends Kernel {
 
 	 private ReferenceData REF_DATA;	
 	  private SecurityId SECURITY_ID;
@@ -193,6 +194,13 @@ public class Product {
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
 	    return str;
+	}
+
+	@Override
+	public void run() {
+
+		calculatePresentValue();
+		
 	}
 	  
 	  

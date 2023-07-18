@@ -167,18 +167,12 @@ public class Main {
 								item.get("VAL_DATE")
 								);
 				
-				Kernel kernel = new Kernel() {
-					
-					@Override
-					public void run() {
-						
-						product.calculatePresentValue();						
-					}
-				};
+				product.calculatePresentValue();
 				
-				kernel.execute(num);
 				
-				kernel.dispose();
+				product.execute(num);
+				
+				product.dispose();
 				
 				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times.\n");
 				
