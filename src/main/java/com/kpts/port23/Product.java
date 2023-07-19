@@ -221,9 +221,8 @@ public class Product extends Kernel {
 	@Override
 	public void run() {
 		
-	String str ="\nFor row "+rowNum+" iteration - "+getGlobalId(); 
-		str+=calculatePresentValue();
-		 computeCount = getGlobalId();  
+		calculatePresentValue();
+		// computeCount = getGlobalId();  
 //	WriteToFile(str);
 	
 	}
