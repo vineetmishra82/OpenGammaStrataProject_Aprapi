@@ -201,7 +201,7 @@ public class Product extends Kernel {
 	    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
 	    
 	    String str = "";
-	    str+="\nPresent Values ->";
+	    str+="Present Values ->";
 	    str+="\nComputed Trade - "+computedTrade.getCurrency()+" : "+computedTrade.getAmount();
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
@@ -209,7 +209,7 @@ public class Product extends Kernel {
 	    
 	    if(!isprinted)
 	    {
-	    	System.out.println("Printing for Row "+rowNum);
+	    	System.out.println("\nPrinting for Row "+rowNum);
 	    	System.out.println(str);
 	    	isprinted = true;
 	    }
