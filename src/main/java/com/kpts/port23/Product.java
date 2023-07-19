@@ -93,6 +93,8 @@ public class Product extends Kernel {
 	  
 	  public String rowNum;
 	  
+	  public boolean isprinted = false;
+	  
 	  public static double computeCount;
 	  
 	  public Product(String sECURITY_ID, String iSSUER_ID, long qUANTITY,
@@ -204,7 +206,14 @@ public class Product extends Kernel {
 	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
-	 
+	    
+	    if(!isprinted)
+	    {
+	    	System.out.println("Printing for Row "+rowNum);
+	    	System.out.println(str);
+	    	isprinted = true;
+	    }
+	    
 	  return str;
 	   
 	}

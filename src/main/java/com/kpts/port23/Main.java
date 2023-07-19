@@ -173,10 +173,15 @@ public class Main {
 				
 				Range range = Range.create(num);
 				product.execute(range);
-				
+							
 				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times and times computed (check) is "+Product.computeCount+" \n");
 				
 				product.dispose();
+				
+				System.out.println("Processed Row "+lineNo+" for "+num.toString()+" times and times computed (check) is "+Product.computeCount+" \n");
+				
+				
+				
 				lineNo++;
 			}
 						
