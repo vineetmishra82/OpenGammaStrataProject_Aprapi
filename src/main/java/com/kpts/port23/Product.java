@@ -207,12 +207,12 @@ public class Product extends Kernel {
 	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
 	    
 	    
-	    if(!isprinted)
-	    {
-	    	System.out.println("\nPrinting for Row "+rowNum);
-	    	System.out.println(str);
-	    	isprinted = true;
-	    }
+//	    if(!isprinted)
+//	    {
+//	    	System.out.println("\nPrinting for Row "+rowNum);
+//	    	System.out.println(str);
+//	    	isprinted = true;
+//	    }
 	    
 	  return str;
 	   
