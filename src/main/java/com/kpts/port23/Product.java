@@ -195,9 +195,8 @@ public class Product extends Kernel {
 	}
 	
 	public void calculatePresentValue() {
-	    CurrencyAmount computedTrade = TRADE_PRICER.presentValue(TRADE, PROVIDER);
-	    CurrencyAmount computedProduct = PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
-	    CurrencyAmount pvPayment =
+	    TRADE_PRICER.presentValue(TRADE, PROVIDER);
+	    PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
 	    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
 	    
 //	    String str = "";
