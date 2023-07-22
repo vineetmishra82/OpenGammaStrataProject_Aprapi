@@ -194,18 +194,18 @@ public class Product extends Kernel {
 		return SecurityId.of(values[0],values[1]);
 	}
 	
-	public String calculatePresentValue() {
+	public void calculatePresentValue() {
 	    CurrencyAmount computedTrade = TRADE_PRICER.presentValue(TRADE, PROVIDER);
 	    CurrencyAmount computedProduct = PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
 	    CurrencyAmount pvPayment =
 	    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
 	    
-	    String str = "";
-	    str+="Present Values ->";
-	    str+="\nComputed Trade - "+computedTrade.getCurrency()+" : "+computedTrade.getAmount();
-	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
-	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
-	    
+//	    String str = "";
+//	    str+="Present Values ->";
+//	    str+="\nComputed Trade - "+computedTrade.getCurrency()+" : "+computedTrade.getAmount();
+//	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
+//	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
+//	    
 	    
 //	    if(!isprinted)
 //	    {
@@ -214,13 +214,14 @@ public class Product extends Kernel {
 //	    	isprinted = true;
 //	    }
 	    
-	  return str;
+	 
 	   
 	}
 
 	@Override
 	public void run() {
 		
+		int gId = getGlobalId();
 		calculatePresentValue();
 
 	
