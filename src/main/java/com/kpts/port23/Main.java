@@ -41,7 +41,7 @@ public class Main {
 	        
 	        for(int i = 0;i<100;i++)
 	        {
-	        	 Product kernel = new Product(input, output);
+	        	Product kernel = new Product(null, null, i, i, i, null, null, null, i, null, null);
 	 	        kernel.execute(input.length);
 	 	        kernel.dispose();
 	        }
