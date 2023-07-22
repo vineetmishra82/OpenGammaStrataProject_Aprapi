@@ -237,6 +237,7 @@ public class Product extends Kernel {
 
 	private float someFunction(float f) {
 		// TODO Auto-generated method stub
+		String str="";
 		return f*23;
 	}
 
