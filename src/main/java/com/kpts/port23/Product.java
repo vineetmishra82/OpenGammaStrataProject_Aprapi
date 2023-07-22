@@ -230,8 +230,8 @@ public class Product extends Kernel {
 	public void run() {
 		
 		int gid = getGlobalId();
-		calculatePresentValue();
-		//output[gid] = someFunction(input[gid]);
+		//calculatePresentValue();
+		output[gid] = someFunction(input[gid]);
 	
 	}
 
