@@ -41,7 +41,7 @@ public class Main {
 	        
 	        for(int i = 0;i<100;i++)
 	        {
-	        	Product kernel = new Product("something,som","something,som",i, 1.0, 1.0, "01-02-03", "01-02-03", "01-02-03", 1.0, "01-02-03", "0");
+	        	Product kernel = new Product("something,som","something,som",i, 1.0, 1.0, "01-02-03", "12-04-2025", "12-04-2025", 1.0, "12-04-2025", "0");
 	 	        kernel.execute(input.length);
 	 	        kernel.dispose();
 	        }
