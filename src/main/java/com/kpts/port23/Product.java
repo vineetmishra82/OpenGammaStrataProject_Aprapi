@@ -229,10 +229,15 @@ public class Product extends Kernel {
 	@Override
 	public void run() {
 		
-		int gId = getGlobalId();
-		calculatePresentValue();
-		
+		int gid = getGlobalId();
+		//calculatePresentValue();
+		output[gid] = someFunction(input[gid]);
 	
+	}
+
+	private float someFunction(float f) {
+		// TODO Auto-generated method stub
+		return f*23;
 	}
 
 	private void WriteToFile(String str) {
