@@ -38,10 +38,15 @@ public class Main {
 	        {
 	        	input[i] = i*3;
 	        }
+	        
+	        for(int i = 0;i<100;i++)
+	        {
+	        	 Product kernel = new Product(input, output);
+	 	        kernel.execute(input.length);
+	 	        kernel.dispose();
+	        }
 
-	        Product kernel = new Product(input, output);
-	        kernel.execute(input.length);
-	        kernel.dispose();
+	       
 	        
 	        System.out.println("Output chk "+output[3]);
 	        System.out.println("Program end..output length -"+output.length);
