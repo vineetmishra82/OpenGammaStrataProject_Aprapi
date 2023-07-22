@@ -53,6 +53,9 @@ import com.opengamma.strata.product.bond.ResolvedFixedCouponBondTrade;
 
 public class Product extends Kernel {
 
+	 private float[] input;
+	    private float[] output;
+
 	 private ReferenceData REF_DATA;	
 	  private SecurityId SECURITY_ID;
 	  private LegalEntityId ISSUER_ID;
@@ -133,6 +136,11 @@ public class Product extends Kernel {
 		this.rowNum = rowNum;
 	  }
 
+	public Product(float[] input, float[] output) {
+        this.input = input;
+        this.output = output;
+    }
+
 	private LegalEntityDiscountingProvider createRatesProvider(LocalDate valuationDate) {
 	    DiscountFactors dscRepo = ZeroRateDiscountFactors.of(EUR, valuationDate, CURVE_REPO);
 	    DiscountFactors dscIssuer = ZeroRateDiscountFactors.of(EUR, valuationDate, CURVE_ISSUER);
@@ -198,6 +206,7 @@ public class Product extends Kernel {
 	    TRADE_PRICER.presentValue(TRADE, PROVIDER);
 	    PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
 	    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
+	
 	    
 //	    String str = "";
 //	    str+="Present Values ->";
@@ -222,7 +231,7 @@ public class Product extends Kernel {
 		
 		int gId = getGlobalId();
 		calculatePresentValue();
-
+		
 	
 	}
 
