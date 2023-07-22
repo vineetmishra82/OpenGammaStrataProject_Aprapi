@@ -113,10 +113,7 @@ public class Main {
 	        {
 	        	
 	       // 	Product kernel = new Product("something,som","something,som",i, 1.0, 1.0, "12-04-2015", "12-04-2025", "29-04-2016", 1.0, "25-04-2016", "0");
-	        	Product kernel = new Product(float[] input, float[] output) {
-	                this.input = input;
-	                this.output = output;
-	            }
+	        	Product kernel = new Product(input, output);
 	        	kernel.execute(10);
 	 	        kernel.dispose();
 	        }
