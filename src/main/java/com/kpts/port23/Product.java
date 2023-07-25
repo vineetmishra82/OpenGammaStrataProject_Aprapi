@@ -203,24 +203,26 @@ public class Product extends Kernel {
 	}
 	
 	public void calculatePresentValue() {
-	    TRADE_PRICER.presentValue(TRADE, PROVIDER);
-	    PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
-	    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
-	
 	    
-//	    String str = "";
-//	    str+="Present Values ->";
-//	    str+="\nComputed Trade - "+computedTrade.getCurrency()+" : "+computedTrade.getAmount();
-//	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
-//	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
-//	    
+		 CurrencyAmount computedTrade = TRADE_PRICER.presentValue(TRADE, PROVIDER);
+		    CurrencyAmount computedProduct = PRODUCT_PRICER.presentValue(PRODUCT, PROVIDER);
+		    CurrencyAmount pvPayment =
+		    PRICER_NOMINAL.presentValue(UPFRONT_PAYMENT, ZeroRateDiscountFactors.of(EUR, VAL_DATE, CURVE_REPO));
+		
 	    
-//	    if(!isprinted)
-//	    {
-//	    	System.out.println("\nPrinting for Row "+rowNum);
-//	    	System.out.println(str);
-//	    	isprinted = true;
-//	    }
+	    String str = "";
+	    str+="Present Values ->";
+	    str+="\nComputed Trade - "+computedTrade.getCurrency()+" : "+computedTrade.getAmount();
+	    str+="\nComputed Product - "+computedProduct.getCurrency()+" : "+computedProduct.getAmount();
+	    str+="\nPv Payment - "+pvPayment.getCurrency()+" : "+pvPayment.getAmount();
+	    
+	    
+	    if(!isprinted)
+	    {
+	    	System.out.println("\nPrinting for Row "+rowNum);
+	    	System.out.println(str);
+	    	isprinted = true;
+	    }
 	    
 	 
 	   
@@ -229,16 +231,10 @@ public class Product extends Kernel {
 	@Override
 	public void run() {
 		
-		int gid = getGlobalId();
-		//calculatePresentValue();
-		output[gid] = someFunction(input[gid]);
+		
+		calculatePresentValue();
+		
 	
-	}
-
-	private float someFunction(float f) {
-		// TODO Auto-generated method stub
-		String str="";
-		return f*23;
 	}
 
 	private void WriteToFile(String str) {

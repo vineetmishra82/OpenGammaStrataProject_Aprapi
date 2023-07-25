@@ -36,7 +36,7 @@ public class Main {
 			if(args.length==2)
 			{
 				loopCount = Double.valueOf(args[1]);
-				System.out.println("Per row loop count is "+loopCount);
+				System.out.println("Per row loop count is "+(int)loopCount);
 			}
 			else {
 				System.out.println("No loop count provided in argument, so per line loop will be taken into consideration.");
@@ -97,34 +97,38 @@ public class Main {
 		{
 			loopCount = -1;
 		}
-
 		
-	  float[] input = new float[256];
-	  float[] output = new float[256];
-
-	        // Initialize input array
-	        
-	        for(int i = 0;i<input.length;i++)
-	        {
-	        	input[i] = i*3;
-	        }
-	        
-	        for(int i = 0;i<100;i++)
-	        {
-	        	
-	       // 	Product kernel = new Product("something,som","something,som",i, 1.0, 1.0, "12-04-2015", "12-04-2025", "29-04-2016", 1.0, "25-04-2016", "0");
-	        	Product kernel = new Product(input, output);
-	        	kernel.execute(10);
-	 	        kernel.dispose();
-	        }
-
-	       
-	        
-	        System.out.println("Output chk "+output[3]);
-	        System.out.println("Program end..output length -"+output.length);
+		int lineNo = 1;
+		
+		for (Map<String,String> item : itemList) {
+		
+		Product product = new 
+				Product(item.get("SECURITY_SCHEME")+","+item.get("SECURITY_VALUE"),
+						item.get("SECURITY_SCHEME")+","+item.get("ISSUER_VALUE"),
+						Long.valueOf(item.get("QUANTITY").replace("L", "")),
+						Double.valueOf(item.get("NOTIONAL")),
+						Double.valueOf(item.get("FIXED_RATE")),
+						item.get("START_DATE"),
+						item.get("END_DATE"),
+						item.get("SETTLEMENT"),
+						Double.valueOf(item.get("CLEAN_PRICE")),
+						item.get("VAL_DATE"),
+						String.valueOf(lineNo)
+						);
+		
+		
+		double loopSize = loopCount==-1 ? Integer.valueOf(item.get("Loops")) : loopCount;
+		
+		product.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.CPU);
+		product.execute((int)loopCount);
+		
+		System.out.println("Processed Row "+lineNo+" for "+loopSize+" times.\n");
+		
+		lineNo++;
 	        
 
 
 	}
 	 
+}
 }
