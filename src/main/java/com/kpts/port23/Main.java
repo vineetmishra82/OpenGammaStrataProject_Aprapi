@@ -120,13 +120,15 @@ public class Main {
 		double loopSize = loopCount==-1 ? Integer.valueOf(item.get("Loops")) : loopCount;
 		
 		product.setExecutionModeWithoutFallback(Kernel.EXECUTION_MODE.CPU);
-		product.execute((int)loopCount);
+		Range range = Range.create((int)loopCount);
+		product.execute(range);
+		product.dispose();
 		
 		System.out.println("Processed Row "+lineNo+" for "+loopSize+" times.\n");
 		
 		lineNo++;
 	        
-
+		break;	
 
 	}
 	 
